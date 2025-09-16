@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search — PeakPrep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg">
+  <style>
+    /* Small local styles for suggestions */
+    #search-wrap{position:relative;max-width:760px}
+    #search-input{width:100%;padding:.8rem;border-radius:12px;border:1px solid var(--border);background:#0b1326;color:var(--text)}
+    #search-suggest{position:absolute;top:110%;left:0;right:0;list-style:none;margin:0;padding:.3rem;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);display:none;z-index:20}
+    #search-suggest.show{display:block}
+    #search-suggest li{margin:0}
+    #search-suggest button{width:100%;text-align:left;padding:.6rem .8rem;background:transparent;border:none;color:var(--text);border-radius:10px;cursor:pointer}
+    #search-suggest button:hover{background:var(--glass)}
+    .chip-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+    .chip{padding:.35rem .6rem;border:1px solid var(--border);border-radius:999px;background:var(--glass);color:var(--text);cursor:pointer}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="navbar container">
+      <a class="brand" href="/index.html">
+        <img src="/assets/img/logo.svg" alt="PeakPrep logo" /><span>PeakPrep</span>
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <nav class="nav" aria-label="Main">
+        <a class="nav-link" href="/index.html"><img src="/assets/icons/home.svg" alt="" aria-hidden="true"> Home</a>
+        <div class="dropdown">
+          <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"><img src="/assets/icons/layers.svg" alt="" aria-hidden="true"> Libraries</button>
+          <div class="dropdown-menu" role="menu">
+            <div class="menu-title">Choose level</div>
+            <a role="menuitem" href="/levels/primary.html">Primary School</a>
+            <a role="menuitem" href="/levels/lower-secondary.html">Lower Secondary Checkpoint</a>
+            <a role="menuitem" href="/levels/igcse.html">IGCSE</a>
+            <a role="menuitem" href="/levels/as-alevel.html">AS/A Level</a>
+          </div>
+        </div>
+        <a class="nav-link" href="/search.html"><img src="/assets/icons/search.svg" alt="" aria-hidden="true"> Search</a>
+        <a class="nav-link" href="/contact.html"><img src="/assets/icons/tutor.svg" alt="" aria-hidden="true"> Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h1>Search</h1>
+      <div id="search-wrap">
+        <input id="search-input" type="search" placeholder="Try: Trigonometry past papers 2019, Algebra notes, Mechanics videos…" autocomplete="off" />
+        <ul id="search-suggest"></ul>
+      </div>
+      <div id="recent" class="chip-row"></div>
+    </section>
+
+    <section class="section">
+      <h2>Results</h2>
+      <div id="results" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> PeakPrep.</p>
+  </footer>
+
+  <script type="module">
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const input = document.getElementById('search-input');
+    const suggest = document.getElementById('search-suggest');
+    const results = document.getElementById('results');
+    const recentWrap = document.getElementById('recent');
+
+    // Load index.json (keywords for autocomplete + map for routing)
+    let IDX = { keywords: [], map: [] };
+    try{
+      const r = await fetch('/assets/data/index.json');
+      if (r.ok) IDX = await r.json();
+    }catch{
+      IDX = {
+        keywords: ["Algebra","Quadratics","Calculus","Mechanics","Organic Chemistry","Cell Biology","Past Papers 2019","Notes Trigonometry"],
+        map: [
+          {"type":"notes","level":"igcse","subject":"Mathematics","topic":"Trigonometry"},
+          {"type":"qas","level":"igcse","subject":"Mathematics","topic":"Quadratics"},
+          {"type":"papers","level":"igcse","subject":"Mathematics","year":2019},
+          {"type":"videos","level":"as-alevel","subject":"Physics","topic":"Mechanics"}
+        ]
+      };
+    }
+
+    // Read query ?q=… and show immediately
+    const qp = new URLSearchParams(location.search);
+    const initialQ = qp.get('q') || '';
+    if (initialQ) {
+      input.value = initialQ;
+      runSearch(initialQ);
+    }
+
+    // Recent searches
+    function loadRecent(){
+      try { return JSON.parse(localStorage.getItem('pp:recentSearches')||'[]'); } catch { return []; }
+    }
+    function saveRecent(q){
+      try {
+        const cur = loadRecent();
+        const next = [q, ...cur.filter(x=>x!==q)].slice(0,8);
+        localStorage.setItem('pp:recentSearches', JSON.stringify(next));
+      } catch {}
+    }
+    function renderRecent(){
+      const rec = loadRecent();
+      recentWrap.innerHTML = rec.map(q=>`<button class="chip" data-q="${q}">${q}</button>`).join('');
+      recentWrap.querySelectorAll('button').forEach(btn=>{
+        btn.addEventListener('click', ()=> { input.value = btn.dataset.q; runSearch(btn.dataset.q); });
+      });
+    }
+    renderRecent();
+
+    // Suggestions
+    function tokenize(s){ return s.toLowerCase().split(/\s+/).filter(Boolean); }
+    function score(candidate, query){
+      const q = tokenize(query), c = candidate.toLowerCase();
+      let s = 0; q.forEach(k => { if (c.includes(k)) s += 1; if (c.startsWith(k)) s += 0.5; });
+      return s;
+    }
+    function getSuggestions(q){
+      const base = IDX.keywords || [];
+      return base
+        .map(k=>({k, s:score(k,q)}))
+        .filter(o=>o.s>0 || q.length===0)
+        .sort((a,b)=>b.s - a.s)
+        .slice(0,8)
+        .map(o=>o.k);
+    }
+    function showSuggestions(items){
+      if (!items.length){ suggest.classList.remove('show'); suggest.innerHTML=''; return; }
+      suggest.innerHTML = items.map(k=>`<li><button type="button">${k}</button></li>`).join('');
+      suggest.classList.add('show');
+      suggest.querySelectorAll('button').forEach(b=>{
+        b.addEventListener('click', ()=> { input.value = b.textContent; suggest.classList.remove('show'); runSearch(b.textContent); });
+      });
+    }
+
+    input.addEventListener('input', ()=>{
+      const q = input.value.trim();
+      showSuggestions(getSuggestions(q));
+    });
+    input.addEventListener('keydown', e=>{
+      if (e.key === 'Enter'){
+        suggest.classList.remove('show');
+        runSearch(input.value.trim());
+      }
+    });
+    document.addEventListener('click', (e)=>{
+      if (!document.getElementById('search-wrap').contains(e.target)) suggest.classList.remove('show');
+    });
+
+    // Search logic
+    function match(entry, q){
+      const t = tokenize(q);
+      const hay = [
+        entry.type, entry.level, entry.subject,
+        entry.topic || '', String(entry.year || '')
+      ].join(' ').toLowerCase();
+      return t.every(k => hay.includes(k));
+    }
+    function runSearch(q){
+      if (!q){ results.innerHTML = '<p class="muted">Type to search the library.</p>'; return; }
+      saveRecent(q); renderRecent();
+
+      const out = (IDX.map || []).filter(e => match(e,q)).slice(0,30);
+      if (!out.length){
+        results.innerHTML = '<div class="card"><div class="card-body"><p>No results found. Try different keywords.</p></div></div>';
+        return;
+      }
+      results.innerHTML = out.map(e => {
+        const anchor = e.type; // qas | notes | videos | papers
+        const yr = e.year ? `&year=${e.year}` : '';
+        const topicParam = e.topic ? ` — ${e.topic}` : (e.year ? ` — ${e.year}` : '');
+        const href = `/subject.html?level=${encodeURIComponent(e.level)}&subject=${encodeURIComponent(e.subject)}${yr}#${anchor}`;
+        const thumb = e.type === 'papers' ? '/assets/img/card-papers.svg'
+                    : e.type === 'notes' ? '/assets/img/card-notes.svg'
+                    : e.type === 'videos' ? '/assets/img/card-videos.svg'
+                    : '/assets/img/card-qa.svg';
+        const label = `${e.subject} — ${e.type.toUpperCase()}${topicParam}`;
+        const sub = `${e.level.toUpperCase()}${e.topic ? ' • ' + e.topic : ''}`;
+        return `
+          <a class="card" href="${href}">
+            <img class="card-thumb" src="${thumb}" alt="">
+            <div class="card-body">
+              <h3>${label}</h3>
+              <p>${sub}</p>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+  </script>
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

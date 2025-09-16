@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Mathematics Paper 1",
+    "subject": "Mathematics",
+    "year": 2024,
+    "term": "Nov",
+    "exam_board": "ZIMSEC",
+    "difficulty": "medium",
+    "file": "assets/papers/math-paper1-2024.pdf"
+  },
+  {
+    "id": 2,
+    "title": "Biology Paper 2",
+    "subject": "Biology",
+    "year": 2023,
+    "term": "June",
+    "exam_board": "Cambridge",
+    "difficulty": "hard",
+    "file": "assets/papers/biology-paper2-2023.pdf"
+  },
+  {
+    "id": 101,
+    "title": "ICT Paper 1",
+    "subject": "ICT",
+    "year": 2022,
+    "term": "Nov",
+    "exam_board": "IGCSE",
+    "difficulty": "medium",
+    "file": "assets/papers/ict-p1-2022.pdf"
+  },
+  {
+    "id": 102,
+    "title": "ICT Paper 1",
+    "subject": "ICT",
+    "year": 2023,
+    "term": "Nov",
+    "exam_board": "IGCSE",
+    "difficulty": "medium",
+    "file": "assets/papers/ict-p1-2023.pdf"
+  },
+  {
+    "id": 103,
+    "title": "ICT Paper 1",
+    "subject": "ICT",
+    "year": 2024,
+    "term": "Nov",
+    "exam_board": "IGCSE",
+    "difficulty": "medium",
+    "file": "assets/papers/ict-p1-2024.pdf"
+  }
+]

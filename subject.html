@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subject — PeakPrep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="navbar container">
+      <a class="brand" href="/index.html">
+        <img src="/assets/img/logo.svg" alt="PeakPrep logo" /><span>PeakPrep</span>
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <nav class="nav" aria-label="Main">
+        <a class="nav-link" href="/index.html"><img src="/assets/icons/home.svg" alt="" aria-hidden="true"> Home</a>
+        <div class="dropdown">
+          <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"><img src="/assets/icons/layers.svg" alt="" aria-hidden="true"> Libraries</button>
+          <div class="dropdown-menu" role="menu">
+            <div class="menu-title">Choose level</div>
+            <a role="menuitem" href="/levels/primary.html">Primary School</a>
+            <a role="menuitem" href="/levels/lower-secondary.html">Lower Secondary Checkpoint</a>
+            <a role="menuitem" href="/levels/igcse.html">IGCSE</a>
+            <a role="menuitem" href="/levels/as-alevel.html">AS/A Level</a>
+          </div>
+        </div>
+        <a class="nav-link" href="/search.html"><img src="/assets/icons/search.svg" alt="" aria-hidden="true"> Search</a>
+        <a class="nav-link" href="/contact.html"><img src="/assets/icons/tutor.svg" alt="" aria-hidden="true"> Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <p class="muted" id="crumbs"></p>
+      <h1 id="page-title">Subject</h1>
+
+      <div class="card" style="margin-top:1rem;">
+        <div class="card-body">
+          <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));align-items:end;">
+            <div>
+              <label for="topicSelect" style="display:block;margin-bottom:.3rem;">Choose topic</label>
+              <select id="topicSelect">
+                <option>Loading topics…</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+              <a class="btn small" href="#qas">Q&As</a>
+              <a class="btn small" href="#notes">Notes</a>
+              <a class="btn small" href="#videos">Videos</a>
+              <a class="btn small" href="#papers">Past Papers</a>
+              <a class="btn small" href="#tutor">Find a Tutor</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q&A -->
+    <section class="section" id="qas">
+      <h2>Q&As</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));" id="qa-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Notes -->
+    <section class="section" id="notes">
+      <h2>Notes</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));" id="notes-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Videos -->
+    <section class="section" id="videos">
+      <h2>Assistive videos</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));" id="videos-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Papers -->
+    <section class="section" id="papers">
+      <h2>Past papers</h2>
+      <div class="card">
+        <div class="card-body">
+          <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));align-items:end;">
+            <div>
+              <label for="yearSelect" style="display:block;margin-bottom:.3rem;">Select year</label>
+              <select id="yearSelect"></select>
+            </div>
+            <div>
+              <button class="btn primary" id="viewPapersBtn">View papers</button>
+            </div>
+          </div>
+          <div id="papers-list" style="margin-top:1rem;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tutor -->
+    <section class="section" id="tutor">
+      <h2>Find a tutor</h2>
+      <div id="tutor-wrap" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <!-- Filled by JS -->
+      </div>
+      <p class="muted" style="margin-top:.5rem;">Showing the highest‑rated matches first.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> PeakPrep.</p>
+  </footer>
+
+  <script type="module">
+    // Basic page data
+    const params = new URLSearchParams(location.search);
+    const level = (params.get('level') || 'igcse').toLowerCase();
+    const subject = params.get('subject') || 'Mathematics';
+    const presetYear = params.get('year');
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('crumbs').textContent = `${level.toUpperCase()} / ${subject}`;
+    document.getElementById('page-title').textContent = `${subject}`;
+
+    // Helpers
+    const years = (() => {
+      const arr = []; for (let y = new Date().getFullYear(); y >= 2010; y--) arr.push(y); return arr;
+    })();
+
+    const fallbackTopics = {
+      "Mathematics": ["Algebra","Geometry","Trigonometry","Calculus","Statistics","Probability"],
+      "Physics": ["Mechanics","Waves","Electricity","Thermal Physics"],
+      "Chemistry": ["Stoichiometry","Organic Chemistry","Periodic Trends","Chemical Bonding"],
+      "Biology": ["Cell Biology","Genetics","Ecology","Human Physiology"],
+      "English Language": ["Comprehension","Summary","Directed Writing"],
+      "Economics": ["Microeconomics","Macroeconomics","International Trade"],
+      "History": ["Cold War","Interwar Period","Post‑colonial Africa"],
+      "Geography": ["Rivers","Coasts","Population","Urbanization"],
+      "ICT": ["Data Types","Spreadsheets","Databases","Networks"]
+    };
+
+    // Load topics
+    async function loadTopicsFor(subject){
+      try{
+        const r = await fetch('/assets/data/topics.json');
+        if (!r.ok) throw new Error();
+        const all = await r.json();
+        return all[subject] && all[subject].length ? all[subject] : (fallbackTopics[subject] || []);
+      }catch{
+        return fallbackTopics[subject] || [];
+      }
+    }
+
+    // Load tutors
+    async function loadTutors(){
+      try{
+        const r = await fetch('/assets/data/tutors.json');
+        if (!r.ok) throw new Error();
+        return await r.json();
+      }catch{
+        return [
+          {"name":"Tariro M.","subjects":["Mathematics","Physics"],"rating":4.9,"topics":["Algebra","Mechanics"],"location":"Harare","contact":"+263770000001"},
+          {"name":"Kuda N.","subjects":["Chemistry"],"rating":4.8,"topics":["Organic Chemistry","Stoichiometry"],"location":"Harare","contact":"+263770000002"},
+          {"name":"Naledi K.","subjects":["Biology"],"rating":4.7,"topics":["Cell Biology","Genetics"],"location":"Bulawayo","contact":"+263770000003"}
+        ];
+      }
+    }
+
+    // Track activity for recommendations
+    function trackVisit({type, topic}){
+      try{
+        const key = 'pp:activity';
+        const list = JSON.parse(localStorage.getItem(key) || '[]');
+        list.unshift({ level, subject, type, topic, ts: Date.now() });
+        localStorage.setItem(key, JSON.stringify(list.slice(0,50)));
+      }catch{}
+    }
+
+    // Renderers
+    function renderQAs(topic){
+      const wrap = document.getElementById('qa-grid');
+      wrap.innerHTML = `
+        <a class="card" href="#">
+          <div class="card-body">
+            <h3>${subject} — ${topic}</h3>
+            <p>Targeted Q&As with worked steps and exam‑style phrasing.</p>
+            <button class="btn small">Open set</button>
+          </div>
+        </a>
+      `;
+      wrap.querySelector('button').addEventListener('click', ()=> trackVisit({type:'qas', topic}));
+    }
+
+    function renderNotes(topic){
+      const wrap = document.getElementById('notes-grid');
+      wrap.innerHTML = `
+        <a class="card" href="#">
+          <div class="card-body">
+            <h3>${subject} — ${topic}</h3>
+            <p>Concise notes with examples and common pitfalls.</p>
+            <button class="btn small">Open notes</button>
+          </div>
+        </a>
+      `;
+      wrap.querySelector('button').addEventListener('click', ()=> trackVisit({type:'notes', topic}));
+    }
+
+    function renderVideos(topic){
+      const wrap = document.getElementById('videos-grid');
+      wrap.innerHTML = `
+        <a class="card" href="#">
+          <div class="card-body">
+            <h3>${subject} — ${topic}</h3>
+            <p>Short, focused explainer videos.</p>
+            <button class="btn small">Watch</button>
+          </div>
+        </a>
+      `;
+      wrap.querySelector('button').addEventListener('click', ()=> trackVisit({type:'videos', topic}));
+    }
+
+    function renderPapers(topic){
+      const sel = document.getElementById('yearSelect');
+      sel.innerHTML = years.map(y => `<option value="${y}">${y}</option>`).join('');
+      if (presetYear && years.includes(Number(presetYear))) sel.value = presetYear;
+
+      function drawList(){
+        const y = sel.value;
+        const list = document.getElementById('papers-list');
+        list.innerHTML = `
+          <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+            <a class="card" href="#"><div class="card-body"><h3>${subject} — Paper 1</h3><p>${y}</p></div></a>
+            <a class="card" href="#"><div class="card-body"><h3>${subject} — Paper 2</h3><p>${y}</p></div></a>
+            <a class="card" href="#"><div class="card-body"><h3>${subject} — Paper 3</h3><p>${y}</p></div></a>
+          </div>
+        `;
+      }
+      drawList();
+      document.getElementById('viewPapersBtn').addEventListener('click', ()=>{
+        trackVisit({type:'papers', topic});
+        drawList();
+      });
+      sel.addEventListener('change', drawList);
+    }
+
+    async function renderTutor(topic){
+      const wrap = document.getElementById('tutor-wrap');
+      const tutors = (await loadTutors())
+        .filter(t => t.subjects.includes(subject))
+        .map(t => ({...t, match: t.topics && topic ? t.topics.includes(topic) : false}))
+        .sort((a,b) => (b.rating - a.rating) || (Number(b.match) - Number(a.match)));
+
+      if (!tutors.length){
+        wrap.innerHTML = `<div class="card"><div class="card-body"><p>No tutors found for ${subject} yet.</p></div></div>`;
+        return;
+      }
+
+      wrap.innerHTML = tutors.slice(0,3).map(t => `
+        <div class="card">
+          <div class="card-body">
+            <h3>${t.name} — ${t.rating.toFixed(2)}★</h3>
+            <p><strong>Subjects:</strong> ${t.subjects.join(', ')}</p>
+            <p><strong>Topics:</strong> ${t.topics ? t.topics.join(', ') : '—'}</p>
+            <p><strong>Location:</strong> ${t.location}</p>
+            <div style="display:flex;gap:.5rem;">
+              <a class="btn small primary" href="tel:${t.contact}">Call</a>
+              <a class="btn small" href="sms:${t.contact}">Text</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      wrap.querySelectorAll('.btn').forEach(btn=>{
+        btn.addEventListener('click', ()=> trackVisit({type:'tutor', topic}));
+      });
+    }
+
+    // Boot
+    const topicSelect = document.getElementById('topicSelect');
+    const topics = await loadTopicsFor(subject);
+    topicSelect.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
+    const initialTopic = topics[0] || 'General';
+
+    function updateAll(topic){
+      renderQAs(topic);
+      renderNotes(topic);
+      renderVideos(topic);
+      renderPapers(topic);
+      renderTutor(topic);
+    }
+
+    topicSelect.addEventListener('change', () => updateAll(topicSelect.value));
+    updateAll(initialTopic);
+  </script>
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

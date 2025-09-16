@@ -1,0 +1,13 @@
+{
+  "keywords": [
+    "Algebra", "Quadratics", "Simultaneous Equations", "Calculus", "Derivatives", "Integrals",
+    "Mechanics", "Kinematics", "Electricity", "Organic Chemistry", "Cell Biology",
+    "Comprehension", "Microeconomics", "International Trade", "Past Papers 2019", "Notes Trigonometry"
+  ],
+  "map": [
+    {"type":"notes","level":"igcse","subject":"Mathematics","topic":"Trigonometry"},
+    {"type":"qas","level":"igcse","subject":"Mathematics","topic":"Quadratics"},
+    {"type":"papers","level":"igcse","subject":"Mathematics","year":2019},
+    {"type":"videos","level":"as-alevel","subject":"Physics","topic":"Mechanics"}
+  ]
+}

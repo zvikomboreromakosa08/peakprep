@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Paper</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="paperContainer"></div>
+  <button id="markComplete">Mark as Completed</button>
+
+  <script src="assets/js/progress.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = parseInt(params.get('id'));
+    fetch('assets/data/past-papers.json')
+      .then(res => res.json())
+      .then(data => {
+        const paper = data.find(p => p.id === id);
+        if (paper) {
+          document.getElementById('paperContainer').innerHTML = `
+            <h1>${paper.title}</h1>
+            <iframe src="${paper.file}" width="100%" height="600"></iframe>
+          `;
+          document.getElementById('markComplete').onclick = () => markCompleted(id);
+        }
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Past Papers</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body>
+  <header>
+    <h1>Past Papers</h1>
+    <button id="themeToggle">Toggle Theme</button>
+  </header>
+
+  <section>
+    <input type="text" id="searchInput" placeholder="Search papers...">
+    <select id="subjectFilter"><option value="">All Subjects</option></select>
+    <select id="yearFilter"><option value="">All Years</option></select>
+    <select id="difficultyFilter">
+      <option value="">All Difficulties</option>
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+  </section>
+
+  <section id="papersList"></section>
+
+  <script src="assets/js/theme-toggle.js"></script>
+  <script src="assets/js/papers.js"></script>
+</body>
+</html>

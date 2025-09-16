@@ -1,0 +1,6 @@
+{
+  "primary": ["Mathematics", "Science", "English", "Social Studies", "ICT"],
+  "lower-secondary": ["Mathematics", "Science", "English", "History", "Geography", "ICT"],
+  "igcse": ["Mathematics", "Physics", "Chemistry", "Biology", "English Language", "Economics", "History", "Geography", "ICT"],
+  "as-alevel": ["Mathematics", "Further Mathematics", "Physics", "Chemistry", "Biology", "Economics", "Computer Science"]
+}

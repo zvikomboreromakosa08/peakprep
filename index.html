@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Big Academy — Master your studies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="navbar container">
+      <a class="brand" href="/index.html">
+        <img src="/assets/img/logo.svg" alt="PeakPrep logo" /><span>Dream Big Academy</span>
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <nav class="nav" aria-label="Main">
+        <a class="nav-link active" href="/index.html"><img src="/assets/icons/home.svg" alt="" aria-hidden="true"> Home</a>
+        <div class="dropdown">
+          <button class="dropdown-toggle"><img src="/assets/icons/layers.svg" alt="" aria-hidden="true"> Libraries</button>
+          <div class="dropdown-menu" role="menu">
+            <div class="menu-title">Choose level</div>
+            <a role="menuitem" href="/levels/primary.html">Primary School</a>
+            <a role="menuitem" href="/levels/lower-secondary.html">Lower Secondary Checkpoint</a>
+            <a role="menuitem" href="/levels/igcse.html">IGCSE</a>
+            <a role="menuitem" href="/levels/as-alevel.html">AS/A Level</a>
+          </div>
+        </div>
+        <a class="nav-link" href="/search.html"><img src="/assets/icons/search.svg" alt="" aria-hidden="true"> Search</a>
+        <a class="nav-link" href="/contact.html"><img src="/assets/icons/tutor.svg" alt="" aria-hidden="true"> Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero-wrap container">
+      <div class="hero">
+        <div>
+          <h1>Study that feels like momentum <span class="accent"></span></h1>
+          <p>Precise Q&As, clean notes, trustworthy videos, and past papers — organized by level, subject, and topic.</p>
+          <div class="hero-cta">
+            <a class="btn primary" href="/levels/igcse.html">Explore IGCSE</a>
+            <a class="btn" href="/search.html">Quick search</a>
+          </div>
+          <div style="margin-top:1rem;">
+            <button id="enable-reminders" class="btn small">Enable study reminders</button>
+          </div>
+        </div>
+        <div>
+          <img src="/assets/img/hero-abstract.svg" alt="Abstract learning graphic">
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="section container" id="recommended">
+      <div class="section-header">
+        <h2>Recommended for you</h2>
+        <p class="muted">Based on your recent activity</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));" id="rec-grid">
+        <!-- Filled by recommend.js -->
+      </div>
+    </section>
+
+    <!-- Quick access categories -->
+    <section class="section container">
+      <div class="section-header"><h2>Jump in</h2></div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+        <a class="card" href="/levels/primary.html">
+          <img src="/assets/img/card-notes.svg" alt="" class="card-thumb">
+          <div class="card-body"><h3>Primary School</h3><p>Foundations that stick.</p></div>
+        </a>
+        <a class="card" href="/levels/lower-secondary.html">
+          <img src="/assets/img/card-qa.svg" alt="" class="card-thumb">
+          <div class="card-body"><h3>Lower Secondary Checkpoint</h3><p>Build confidence and pace.</p></div>
+        </a>
+        <a class="card" href="/levels/igcse.html">
+          <img src="/assets/img/card-papers.svg" alt="" class="card-thumb">
+          <div class="card-body"><h3>IGCSE</h3><p>Past papers and topic drills.</p></div>
+        </a>
+        <a class="card" href="/levels/as-alevel.html">
+          <img src="/assets/img/card-videos.svg" alt="" class="card-thumb">
+          <div class="card-body"><h3>AS/A Level</h3><p>Mastery-focused resources.</p></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- About preview -->
+    <section class="section container">
+      <div class="card">
+        <div class="card-body">
+          <h2>About Dream Big Academy</h2>
+          <p>We cut through noise and surface only what helps you progress — clearly structured materials, beautiful layouts, and tools that save time.</p>
+          <p>If learning feels smooth and focused, you’ll keep going. That’s the point.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Dream Big Academy. Built for curious minds.</p>
+  </footer>
+
+  <script type="module">
+    import { getRecommendations } from '/assets/js/recommend.js';
+    import { initNotifications } from '/assets/js/notifications.js';
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Render recommendations
+    const recs = getRecommendations();
+    const grid = document.getElementById('rec-grid');
+    if (recs.length) {
+      recs.forEach(r=>{
+        const el = document.createElement('a');
+        el.className='card fade-enter-active';
+        el.href=r.href;
+        el.innerHTML = `
+          <img src="/assets/img/card-qa.svg" class="card-thumb" alt="">
+          <div class="card-body"><h3>${r.label}</h3><p>${r.level.toUpperCase()} — ${r.subject}</p></div>
+        `;
+        grid.appendChild(el);
+      });
+    } else {
+      grid.innerHTML = `<div class="card"><div class="card-body"><p>No activity yet. Start by choosing a level above.</p></div></div>`;
+    }
+
+    // Notifications
+    initNotifications();
+  </script>
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>

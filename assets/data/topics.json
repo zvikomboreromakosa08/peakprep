@@ -1,0 +1,8 @@
+{
+  "Mathematics": ["Algebra", "Geometry", "Trigonometry", "Calculus", "Statistics", "Probability"],
+  "Physics": ["Mechanics", "Waves", "Electricity", "Thermal Physics"],
+  "Chemistry": ["Stoichiometry", "Organic Chemistry", "Periodic Trends", "Chemical Bonding"],
+  "Biology": ["Cell Biology", "Genetics", "Ecology", "Human Physiology"],
+  "English Language": ["Comprehension", "Summary", "Directed Writing"],
+  "Economics": ["Microeconomics", "Macroeconomics", "International Trade"]
+}

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — PeakPrep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg">
+</head>
+<body>
+  <header class="site-header">
+    <div class="navbar container">
+      <a class="brand" href="/index.html">
+        <img src="/assets/img/logo.svg" alt="PeakPrep logo" /><span>PeakPrep</span>
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <nav class="nav" aria-label="Main">
+        <a class="nav-link" href="/index.html"><img src="/assets/icons/home.svg" alt="" aria-hidden="true"> Home</a>
+        <div class="dropdown">
+          <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"><img src="/assets/icons/layers.svg" alt="" aria-hidden="true"> Libraries</button>
+          <div class="dropdown-menu" role="menu">
+            <div class="menu-title">Choose level</div>
+            <a role="menuitem" href="/levels/primary.html">Primary School</a>
+            <a role="menuitem" href="/levels/lower-secondary.html">Lower Secondary Checkpoint</a>
+            <a role="menuitem" href="/levels/igcse.html">IGCSE</a>
+            <a role="menuitem" href="/levels/as-alevel.html">AS/A Level</a>
+          </div>
+        </div>
+        <a class="nav-link" href="/search.html"><img src="/assets/icons/search.svg" alt="" aria-hidden="true"> Search</a>
+        <a class="nav-link active" href="/contact.html"><img src="/assets/icons/tutor.svg" alt="" aria-hidden="true"> Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h1>Contact us</h1>
+      <p class="muted">Questions, feedback, or partnerships — we’d love to hear from you.</p>
+
+      <div class="card" style="max-width:720px;">
+        <div class="card-body">
+          <form action="https://formspree.io/f/your-id" method="POST">
+            <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+              <label>
+                <span>Name</span>
+                <input type="text" name="name" required style="width:100%;padding:.7rem;border-radius:10px;border:1px solid var(--border);background:var(--glass);color:var(--text)">
+              </label>
+              <label>
+                <span>Email</span>
+                <input type="email" name="email" required style="width:100%;padding:.7rem;border-radius:10px;border:1px solid var(--border);background:var(--glass);color:var(--text)">
+              </label>
+            </div>
+            <label style="display:block;margin-top:1rem;">
+              <span>Message</span>
+              <textarea name="message" rows="6" required style="width:100%;padding:.7rem;border-radius:10px;border:1px solid var(--border);background:var(--glass);color:var(--text)"></textarea>
+            </label>
+            <div style="margin-top:1rem;display:flex;gap:.6rem;">
+              <button class="btn primary" type="submit">Send</button>
+              <a class="btn" href="mailto:hello@peakprep.example">Email us directly</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <p><strong>Support hours:</strong> Mon–Fri, 9:00–17:00</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/assets/js/app.js"></script>
+</body>
+</html>
