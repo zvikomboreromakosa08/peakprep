@@ -1,6 +1,532 @@
 {
-  "primary": ["Mathematics", "Science", "English", "Social Studies", "ICT"],
-  "lower-secondary": ["Mathematics", "Science", "English", "History", "Geography", "ICT"],
-  "igcse": ["Mathematics", "Physics", "Chemistry", "Biology", "English Language", "Economics", "History", "Geography", "ICT"],
-  "as-alevel": ["Mathematics", "Further Mathematics", "Physics", "Chemistry", "Biology", "Economics", "Computer Science"]
+  "subjects": [
+    {
+      "id": "accounting_0452",
+      "name": "Accounting",
+      "code": "0452",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Principles of accounting and financial reporting"
+    },
+    {
+      "id": "accounting_9-1_0985",
+      "name": "Accounting (9-1)",
+      "code": "0985",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Graded 9-1 accounting syllabus"
+    },
+    {
+      "id": "afrikaans_0548",
+      "name": "Afrikaans - Second Language",
+      "code": "0548",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Afrikaans as a second language"
+    },
+    {
+      "id": "agriculture_0600",
+      "name": "Agriculture",
+      "code": "0600",
+      "level": "igcse",
+      "category": "Sciences",
+      "description": "Agricultural principles and practices"
+    },
+    {
+      "id": "arabic_fl_0508",
+      "name": "Arabic - First Language",
+      "code": "0508",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Arabic as a first language"
+    },
+    {
+      "id": "arabic_fl_9-1_7184",
+      "name": "Arabic - First Language (9-1)",
+      "code": "7184",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 Arabic first language"
+    },
+    {
+      "id": "arabic_foreign_0544",
+      "name": "Arabic - Foreign Language",
+      "code": "0544",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Arabic as a foreign language"
+    },
+    {
+      "id": "arabic_9-1_7180",
+      "name": "Arabic (9-1)",
+      "code": "7180",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 Arabic syllabus"
+    },
+    {
+      "id": "art_design_0400",
+      "name": "Art & Design",
+      "code": "0400",
+      "level": "igcse",
+      "category": "Arts",
+      "description": "Creative arts and design principles"
+    },
+    {
+      "id": "art_design_9-1_0989",
+      "name": "Art & Design (9-1)",
+      "code": "0989",
+      "level": "igcse",
+      "category": "Arts",
+      "description": "Graded 9-1 art and design syllabus"
+    },
+    {
+      "id": "bahasa_indonesia_0538",
+      "name": "Bahasa Indonesia",
+      "code": "0538",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Indonesian language studies"
+    },
+    {
+      "id": "biology_0610",
+      "name": "Biology",
+      "code": "0610",
+      "level": "igcse",
+      "category": "Sciences",
+      "description": "Study of living organisms and life processes"
+    },
+    {
+      "id": "biology_9-1_0970",
+      "name": "Biology (9-1)",
+      "code": "0970",
+      "level": "igcse",
+      "category": "Sciences",
+      "description": "Graded 9-1 biology syllabus"
+    },
+    {
+      "id": "business_0264",
+      "name": "Business",
+      "code": "0264",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Fundamental business concepts"
+    },
+    {
+      "id": "business_9-1_0774",
+      "name": "Business (9-1)",
+      "code": "0774",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Graded 9-1 business syllabus"
+    },
+    {
+      "id": "business_studies_0450",
+      "name": "Business Studies",
+      "code": "0450",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Comprehensive business studies"
+    },
+    {
+      "id": "business_studies_9-1_0986",
+      "name": "Business Studies (9-1)",
+      "code": "0986",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Graded 9-1 business studies syllabus"
+    },
+    {
+      "id": "chemistry_0620",
+      "name": "Chemistry",
+      "code": "0620",
+      "level": "igcse",
+      "category": "Sciences",
+      "description": "Study of matter and its transformations"
+    },
+    {
+      "id": "chemistry_9-1_0971",
+      "name": "Chemistry (9-1)",
+      "code": "0971",
+      "level": "igcse",
+      "category": "Sciences",
+      "description": "Graded 9-1 chemistry syllabus"
+    },
+    {
+      "id": "chinese_fl_0509",
+      "name": "Chinese - First Language",
+      "code": "0509",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Chinese as a first language"
+    },
+    {
+      "id": "chinese_sl_0523",
+      "name": "Chinese - Second Language",
+      "code": "0523",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Chinese as a second language"
+    },
+    {
+      "id": "chinese_foreign_0547",
+      "name": "Chinese (Mandarin) - Foreign Language",
+      "code": "0547",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Mandarin Chinese as a foreign language"
+    },
+    {
+      "id": "computer_science_0478",
+      "name": "Computer Science",
+      "code": "0478",
+      "level": "igcse",
+      "category": "Technology",
+      "description": "Computer science principles and programming"
+    },
+    {
+      "id": "computer_science_9-1_0984",
+      "name": "Computer Science (9-1)",
+      "code": "0984",
+      "level": "igcse",
+      "category": "Technology",
+      "description": "Graded 9-1 computer science syllabus"
+    },
+    {
+      "id": "design_tech_0445",
+      "name": "Design & Technology",
+      "code": "0445",
+      "level": "igcse",
+      "category": "Technology",
+      "description": "Design and technology principles"
+    },
+    {
+      "id": "design_tech_9-1_0979",
+      "name": "Design & Technology (9-1)",
+      "code": "0979",
+      "level": "igcse",
+      "category": "Technology",
+      "description": "Graded 9-1 design and technology syllabus"
+    },
+    {
+      "id": "drama_0411",
+      "name": "Drama",
+      "code": "0411",
+      "level": "igcse",
+      "category": "Arts",
+      "description": "Dramatic arts and performance"
+    },
+    {
+      "id": "drama_9-1_0994",
+      "name": "Drama (9-1)",
+      "code": "0994",
+      "level": "igcse",
+      "category": "Arts",
+      "description": "Graded 9-1 drama syllabus"
+    },
+    {
+      "id": "economics_0455",
+      "name": "Economics",
+      "code": "0455",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Economic principles and theories"
+    },
+    {
+      "id": "economics_9-1_0987",
+      "name": "Economics (9-1)",
+      "code": "0987",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Graded 9-1 economics syllabus"
+    },
+    {
+      "id": "english_fl_0500",
+      "name": "English - First Language",
+      "code": "0500",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "English as a first language"
+    },
+    {
+      "id": "english_fl_9-1_0990",
+      "name": "English - First Language (9-1)",
+      "code": "0990",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 English first language"
+    },
+    {
+      "id": "english_fl_us_0524",
+      "name": "English - First Language (US)",
+      "code": "0524",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "US English as a first language"
+    },
+    {
+      "id": "english_lit_us_0427",
+      "name": "English – Literature (US)",
+      "code": "0427",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "US English literature studies"
+    },
+    {
+      "id": "english_lit_0475",
+      "name": "English – Literature in English",
+      "code": "0475",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "English literature studies"
+    },
+    {
+      "id": "english_lit_9-1_0992",
+      "name": "English – Literature in English (9-1)",
+      "code": "0992",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 English literature syllabus"
+    },
+    {
+      "id": "english_eal_0472",
+      "name": "English (as an Additional Language)",
+      "code": "0472",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "English as an additional language"
+    },
+    {
+      "id": "english_eal_9-1_0772",
+      "name": "English (as an Additional Language) (9-1)",
+      "code": "0772",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 English as additional language"
+    },
+    {
+      "id": "english_esl_egypt_0465",
+      "name": "English (Core) as a Second Language (Egypt)",
+      "code": "0465",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "English as second language for Egypt"
+    },
+    {
+      "id": "english_esl_speaking_0511",
+      "name": "English as a Second Language (Count-in speaking)",
+      "code": "0511",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "ESL with speaking component"
+    },
+    {
+      "id": "english_esl_speaking_9-1_0991",
+      "name": "English as a Second Language (Count-in Speaking) (9-1)",
+      "code": "0991",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 ESL with speaking"
+    },
+    {
+      "id": "english_esl_endorsement_0510",
+      "name": "English as a Second Language (Speaking endorsement)",
+      "code": "0510",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "ESL with speaking endorsement"
+    },
+    {
+      "id": "english_esl_endorsement_9-1_0993",
+      "name": "English as a Second Language (Speaking Endorsement) (9-1)",
+      "code": "0993",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 ESL with speaking endorsement"
+    },
+    {
+      "id": "enterprise_0454",
+      "name": "Enterprise",
+      "code": "0454",
+      "level": "igcse",
+      "category": "Commerce",
+      "description": "Enterprise and entrepreneurship"
+    },
+    {
+      "id": "env_management_0680",
+      "name": "Environmental Management",
+      "code": "0680",
+      "level": "igcse",
+      "category": "Sciences",
+      "description": "Environmental science and management"
+    },
+    {
+      "id": "food_nutrition_0648",
+      "name": "Food & Nutrition",
+      "code": "0648",
+      "level": "igcse",
+      "category": "Sciences",
+      "description": "Food science and nutrition studies"
+    },
+    {
+      "id": "french_fl_0501",
+      "name": "French - First Language",
+      "code": "0501",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "French as a first language"
+    },
+    {
+      "id": "french_foreign_0520",
+      "name": "French - Foreign Language",
+      "code": "0520",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "French as a foreign language"
+    },
+    {
+      "id": "french_9-1_7156",
+      "name": "French (9-1)",
+      "code": "7156",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 French syllabus"
+    },
+    {
+      "id": "geography_0460",
+      "name": "Geography",
+      "code": "0460",
+      "level": "igcse",
+      "category": "Humanities",
+      "description": "Physical and human geography"
+    },
+    {
+      "id": "geography_9-1_0976",
+      "name": "Geography (9-1)",
+      "code": "0976",
+      "level": "igcse",
+      "category": "Humanities",
+      "description": "Graded 9-1 geography syllabus"
+    },
+    {
+      "id": "german_fl_0505",
+      "name": "German - First Language",
+      "code": "0505",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "German as a first language"
+    },
+    {
+      "id": "german_foreign_0525",
+      "name": "German - Foreign Language",
+      "code": "0525",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "German as a foreign language"
+    },
+    {
+      "id": "german_9-1_7159",
+      "name": "German (9-1)",
+      "code": "7159",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 German syllabus"
+    },
+    {
+      "id": "global_perspectives_0457",
+      "name": "Global Perspectives",
+      "code": "0457",
+      "level": "igcse",
+      "category": "Humanities",
+      "description": "Global issues and perspectives"
+    },
+    {
+      "id": "hindi_sl_0549",
+      "name": "Hindi as a Second Language",
+      "code": "0549",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Hindi as a second language"
+    },
+    {
+      "id": "history_0470",
+      "name": "History",
+      "code": "0470",
+      "level": "igcse",
+      "category": "Humanities",
+      "description": "Historical events and analysis"
+    },
+    {
+      "id": "history_us_0409",
+      "name": "History - American (US)",
+      "code": "0409",
+      "level": "igcse",
+      "category": "Humanities",
+      "description": "US history studies"
+    },
+    {
+      "id": "history_9-1_0977",
+      "name": "History (9-1)",
+      "code": "0977",
+      "level": "igcse",
+      "category": "Humanities",
+      "description": "Graded 9-1 history syllabus"
+    },
+    {
+      "id": "ict_0417",
+      "name": "Information and Communication Technology",
+      "code": "0417",
+      "level": "igcse",
+      "category": "Technology",
+      "description": "ICT principles and applications"
+    },
+    {
+      "id": "ict_9-1_0983",
+      "name": "Information and Communication Technology (9-1)",
+      "code": "0983",
+      "level": "igcse",
+      "category": "Technology",
+      "description": "Graded 9-1 ICT syllabus"
+    },
+    {
+      "id": "isizulu_sl_0531",
+      "name": "IsiZulu as a Second Language",
+      "code": "0531",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "IsiZulu as a second language"
+    },
+    {
+      "id": "islamiyat_0493",
+      "name": "Islamiyat",
+      "code": "0493",
+      "level": "igcse",
+      "category": "Humanities",
+      "description": "Islamic studies and principles"
+    },
+    {
+      "id": "italian_foreign_0535",
+      "name": "Italian - Foreign Language",
+      "code": "0535",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Italian as a foreign language"
+    },
+    {
+      "id": "italian_9-1_7164",
+      "name": "Italian (9-1)",
+      "code": "7164",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Graded 9-1 Italian syllabus"
+    },
+    {
+      "id": "japanese_foreign",
+      "name": "Japanese - Foreign Language",
+      "code": "New",
+      "level": "igcse",
+      "category": "Languages",
+      "description": "Japanese as a foreign language"
+    }
+  ]
 }
